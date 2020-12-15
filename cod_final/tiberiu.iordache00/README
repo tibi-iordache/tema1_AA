@@ -1,0 +1,111 @@
+Iordache Tiberiu-Mihai 322CD
+ID moodle: tiberiu.iordache00
+
+Identificarea numerelor prime
+
+Solovay-Strassen & Frobenius
+
+Structura arhiva:
+- solovay.h
+    Contine semnaturile functiilor necesare pentru algoritmul Solovay-Strassen
+- solovay.cpp
+    Contine implementarea algoritmului.
+
+    In cadrul implementari am folosit si cateva bucati de cod din surse 
+    externe:
+
+    https://www.geeksforgeeks.org/primality-test-set-4-solovay-strassen/
+    
+
+-frobenius.h
+    Contine semnaturile functiilor necesare pentru algoritmul Frobenius
+-frobenius.cpp        
+    Contine implementarea algoritmului. 
+
+    In cadrul implementari am folosit si cateva bucati de cod din surse 
+    externe:
+
+    https://github.com/khash2a/FrobeniusPython/blob/master/frobenius.py
+
+    Pentru functia de verificare daca un nr este patrat perfect:
+    https://www.geeksforgeeks.org/check-if-given-number-is-perfect-square-in-cpp/
+
+    Pentru functia de calculare a restului unui nr in cazul in care nr < 0
+    https://stackoverflow.com/questions/26144959/modular-multiplicative-inverse-function-doesnt-work-for-negative-numbers
+    
+
+-checker.cpp
+    Din acest fisier se va face testarea algoritmilor. Prima data se va testa
+    algoritmul Solovay-Strassen, dupa care Frobenius. Timpul de executie al
+    fiecarui test va fi afisat pe ecran, imediat dupa rulare.
+
+-test_generator.cpp
+    Contine codurile folosite pentru generarea unor teste.
+
+-Makefile
+    build: compileaza toate sursele, inclusiv generatorul de teste
+    
+    run_tests: initial va rula generatorul de teste, dupa care va incepe
+                testarea algoritmilor implementati
+                
+    clean
+
+-in
+    Folder ce contine fisierele de input. Pe prima linie se va afla numarul
+    de elemente din secventa, dupa care numerele care trebuie testate.
+
+    test0.in
+        Test basic pentru testarea functionalitatii algoritmului.
+
+    test1.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine primele 100
+        numere naturale.
+
+    test2.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine primele 1000
+        numere naturale.
+
+    test3.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine primele 10000
+        numere naturale.
+    
+    test4.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine numai numere
+        compuse formate prin a inmulti repetat 4 cu 3.
+
+    test5.in
+        Test facut de mana ce contine numere compuse foarte mari.
+
+    test6.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine primele n 
+        numere din sirul lui Fibonacci. 
+
+        Pentru codul acestei generari am folosit si bucati de cod de la 
+        sursa de mai jos.
+
+        https://www.programiz.com/cpp-programming/examples/fibonacci-series
+
+    test7.in
+        Test generat cu ajutorul lui test_generator.cpp. Contine primele n
+        numere prime generate cu ajutorul ciurului lui Erastotene.
+
+        Pentru codul acestei generari am folosit si bucati de cod de la 
+        sursa de mai jos.
+
+        https://infogenius.ro/ciurul-lui-eratostene-cpp/
+
+-out
+    Folder ce contine fiecare fisier de output corespunzator fiecarui test.    
+    Este generat in cadrul programului checker.cpp. 
+    Pe prima linie se va afla numarul de numere probabil prime obtinute dupa
+    rularea fiecarui algoritm, iar pe a doua linie numere declarate
+    proabil prime.
+
+    Format fisiere out:
+        test0.in - test7.in - fisierele de out in urma rularii algoritmului
+                                solovay-strassen
+
+        test10.in - test17.in - fisierele de out in urma rularii algoritmului
+                                frobenius                              
+
+
