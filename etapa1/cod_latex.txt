@@ -1,0 +1,116 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+%
+\title{Identificarea numerelor prime}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Iordache Tiberiu-Mihai, Grupa 322CD}
+%
+%\authorrunning{F. Author et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Universitatea Politehnica din Bucure\c{s}ti \\
+Facultatea de Automatic\u{a} \c{s}i Calculatoare}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+Acest document este o analiz\u{a} a algoritmilor de identificare
+a numerelor prime(Solovay-Strassen \c{s}i Frobenius) care prezint\u{a}
+performan\c{t}a acestora pe diferite seturi de date.
+
+\keywords{Numere prime \and Modulo}
+\end{abstract}
+%
+%
+%
+\section{Descrierea problemei rezolvate}
+
+Principala problem\u{a} pe care dorim sa o rezolv\u{a}m prin intermediul acestui document este identificarea numerlor prime dintr-un set de date de intrare dat.
+
+Aceast\u{a} problem\u{a} are foarte multe aplica\c{t}ii \^{i}n via\c{t}a de zi cu zi, cea mai \^{i}nt\^{a}lnit\u{a} fiind criptarea datelor. \c{S}tim foarte bine c\u{a} putem \^{i}nmul\c{t}ii dou\u{a} numere prime foarte mari cu u\c{s}urin\c{t}\u{a}, \^{i}ns\u{a} procesul invers dureaz\u{a} mult mai mult timp, ajut\^{a}nd astfel la o mai bun\u{a} securizare a datelor noastre.
+
+\section{Specificarea solu\c{t}iilor alese}
+Algoritmii ale\c{s}i sunt:
+\subsection{Solovay-Strassen}
+
+Acest algoritm determin\u{a} rapid dac\u{a} un num\u{a}r este compus sau posibil prim. Se folosesc dou\u{a} simboluri:
+\subsubsection{Simbolul Legendre}
+
+Fie p un num\u{a}r impar prim \c{s}i a un num\u{a}r \^{i}ntreg pozitiv, definim simbolul Legendre ca fiind:
+
+\[
+    (\frac{a}{p}) = 
+    \begin{cases}
+        0,& \text{dac\u{a} p este un divizor al lui a} \\
+        +1,& \text{dac\u{a} exist\u{a} un } k \text{ \^{i}ntreg astfel \^{i}nc\^{a}t } k^2 = \text{a(mod p)}\\
+        -1,& \text{\^{i}n rest}
+    \end{cases}
+\]
+
+Datorit\u{a} unui rezultat al lui Euler, avem rela\c{t}ia:
+
+\[
+    (\frac{a}{p}) = a^{\frac{p-1}{2}}\text{mod p}
+\]
+
+\subsubsection{Simbolul Jacobian}
+
+Este o generalizare a simbolului Legendre, unde n este un num\u{a}r \^{i}ntreg pozitiv:
+
+\[
+    (\frac{a}{n}) = (\frac{a}{p_1})^{k_1} \cdot (\frac{a}{p_2})^{k_2} \cdot.....\cdot (\frac{a}{p_n})^{k_n}
+\]
+
+Pentru ca un num\u{a}r s\u{a} fie posibil prim, acesta trebuie s\u{a} aib\u{a} simbolul Jacobian egal cu simbolul Legendre.
+
+\[
+    (\frac{a}{n}) = a^{\frac{n-1}{2}}\text{mod n}
+\]
+
+Dac\u{a} aceast\u{a} condi\c{t}ie nu este satisf\u{a}cut\u{a}, num\u{a}rul este compus, iar programul se va oprii. A\c{s}adar, va fi nevoie de mai multe itera\c{t}ii pentru a stabili cu un grad mai ridicat de certitudine dac\u{a} un num\u{a}r este prim sau compus.\\
+
+\subsection{Frobenius}
+
+Acest algoritm se bazeaz\u{a} pe descompunerea unui polinom f(x), definit in \(Z_n \) (unde n este num\u{a}rul c\u{a}ruia dorim s\u{a} \^{i}i test\u{a}m primalitatea), \^{i}n factori de grade distincte.
+Implementarea se va face prin trei pa\c{s}i: pasul de factorizare, pasul Frobenius \c{s}i pasul Jacobi.
+
+\section{Criteriile de evaluare pentru solu\c{t}ia propusa}
+
+Testele vor fi concepute \^{i}n a\c{s}a fel \^{i}nc\^{a}t s\u{a} prezinte \^{i}ntr-o manier\u{a} c\^{a}t mai obiectiv\u{a} accurate\c{t}ea agloritmilor, prin testarea
+numerelor compuse de diverse valori, \c{s}i mari \c{s}i mici, dar \c{s}i durata de execu\c{t}ie a acestora, prin testarea unor numere din ce \^{i}n ce mai mari.
+
+
+\section{Referin\c{t}e}
+
+1. Solvay-Strassen's Primality Test,\\ \url{https://www.geeksforgeeks.org/primality-test-set-4-solovay-strassen/}.\\
+Ultima accesare: 11 Nov 2020.\\
+
+
+2. Testing for Prime Numbers: The Solovay-Strassen Algorithm,\\ \url{http://www-math.ucdenver.edu/~wcherowi/courses/m5410/ctcprime.html}.\\
+Ultima accesare: 11 Nov 2020. \\
+
+3. Frobenius pseudoprimes and a cubic primality test, \\ \url{http://nntdm.net/papers/nntdm-20/NNTDM-20-4-11-20.pdf}.\\
+Ultima accesare: 11 Nov 2020.\\
+
+
+\end{document}

@@ -1,0 +1,62 @@
+TEMA AA
+
+
+pagina de coperta:
+
+
+http://www.latextemplates.com/template/academic-title-page
+
+
+latex usefull shit:
+
+simboluri inecuatii
+https://tex.stackexchange.com/questions/182620/why-does-leq-show-up-as-le
+
+template pseudocod
+https://www.overleaf.com/learn/latex/algorithms
+
+citing sites
+https://libguides.rhul.ac.uk/referencing/latex
+
+simboluri matematice
+https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols
+
+tabel
+https://www.overleaf.com/learn/latex/tables
+
+bold italic etc
+https://www.overleaf.com/learn/latex/bold,_italics_and_underlining
+
+referinta prin click
+https://tex.stackexchange.com/questions/317941/latex-click-reference-to-jump-to-reference/324123
+
+mate puteri indici
+https://www.overleaf.com/learn/latex/subscripts_and_superscripts
+
+simboluri matematice2
+https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+conjugat 
+https://tex.stackexchange.com/questions/114518/conjugation-of-matrices-how-to-typeset-it
+
+visited on
+https://tex.stackexchange.com/questions/51079/add-retrieved-last-accessed-or-similar-information-to-authoryear-in-biblate
+
+epsilor theta idk
+https://tex.stackexchange.com/questions/238179/epsilon-and-log-functions
+
+omicron
+https://tex.stackexchange.com/questions/233257/omicron-not-working-in-latex
+
+
+
+
+
+
+
+
+
+
+
+
+

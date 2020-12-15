@@ -1,0 +1,357 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{MnSymbol}
+\usepackage{array}
+\let\conjugatet\overline
+\newcommand\Omicron{O}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage[urldate=comp,dateabbrev=false]{biblatex}
+\usepackage{algorithmic}
+\addbibresource{bibliografie.bib}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+%
+\title{Identificarea numerelor prime}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Iordache Tiberiu-Mihai, Grupa 322CD}
+%
+%\authorrunning{F. Author et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Universitatea Politehnica din Bucure\c{s}ti \\
+Facultatea de Automatic\u{a} \c{s}i Calculatoare}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+Acest document este o analiz\u{a} a algoritmilor de identificare
+a numerelor prime(Solovay-Strassen \c{s}i Frobenius) care prezint\u{a}
+performan\c{t}a acestora pe diferite seturi de date.
+\keywords{Numere prime \and Modulo}
+\end{abstract}
+%
+%
+%
+\section{Introducere}
+\subsection{Descrierea problemei rezolvate}
+Principala problem\u{a} pe care dorim sa o rezolv\u{a}m prin intermediul acestui document
+este identificarea numerlor probabil prime dintr-un set de date de intrare dat.
+\subsection{Exemple de aplica\c{t}ii practice pentru problema aleas\u{a}}
+Aceast\u{a} problem\u{a} are foarte multe aplica\c{t}ii \^{i}n via\c{t}a de zi cu zi, cea mai
+\^{i}nt\^{a}lnit\u{a} fiind criptarea datelor. \c{S}tim foarte bine c\u{a} putem
+\^{i}nmul\c{t}ii dou\u{a} numere prime foarte mari cu u\c{s}urin\c{t}\u{a}, \^{i}ns\u{a}
+procesul invers dureaz\u{a} mult mai mult timp, ajut\^{a}nd astfel la o mai bun\u{a}
+securizare a datelor noastre.
+\subsection{Specificarea solu\c{t}iilor alese}
+Pentru a rezolva problema prezentat\u{a} am ales s\u{a} folosesc algoritmii Solovay-Strassen
+\c{s}i Frobenius.
+\subsection{Specificarea criteriilor de evaluare alese pentru validarea solu\c{t}iilor alese}
+Testele vor fi concepute \^{i}n a\c{s}a fel \^{i}nc\^{a}t s\u{a} prezinte \^{i}ntr-o
+manier\u{a} c\^{a}t mai obiectiv\u{a} accurate\c{t}ea agloritmilor, prin testarea
+numerelor compuse de diverse valori, \c{s}i mari \c{s}i mici, dar \c{s}i durata de
+execu\c{t}ie a acestora, prin testarea unor numere din ce \^{i}n ce mai mari.
+\section{Prezentarea solu\c{t}iilor}
+
+\subsection{Descrierea modului \^{i}n care func\c{t}ioneaz\u{a} algoritmii ale\c{s}i}
+\subsubsection{Solovay-Strassen\cite{solovay}}
+Acest algoritm determin\u{a} rapid dac\u{a} un num\u{a}r este compus sau posibil prim. Se
+folosesc dou\u{a} simboluri:
+\newline
+\newline
+Simbolul Legendre
+
+Fie p un num\u{a}r impar prim \c{s}i a un num\u{a}r \^{i}ntreg pozitiv, definim simbolul
+Legendre ca fiind:
+
+\[
+    (\frac{a}{p}) = 
+    \begin{cases}
+        0,& \text{dac\u{a} p este un divizor al lui a} \\
+        +1,& \text{dac\u{a} exist\u{a} un } k \text{ \^{i}ntreg astfel \^{i}nc\^{a}t } k^2 = \text{a(mod p)}\\
+        -1,& \text{\^{i}n rest}
+    \end{cases}
+\]
+
+Datorit\u{a} unui rezultat al lui Euler\cite{solovayMath}, avem rela\c{t}ia:
+
+\[
+    (\frac{a}{p}) = a^{\frac{p-1}{2}}\text{mod p}
+\]
+% \newline
+\newline
+Simbolul Jacobian
+
+Este o generalizare a simbolului Legendre, unde n este un num\u{a}r \^{i}ntreg pozitiv:
+
+\[
+    (\frac{a}{n}) = (\frac{a}{p_1})^{k_1} \cdot (\frac{a}{p_2})^{k_2} \cdot.....\cdot (\frac{a}{p_n})^{k_n}
+\]
+
+Pentru ca un num\u{a}r s\u{a} fie posibil prim, acesta trebuie s\u{a} aib\u{a} simbolul Jacobian egal cu simbolul Legendre.
+
+\[
+    (\frac{a}{n}) = a^{\frac{n-1}{2}}\text{mod n}
+\]
+
+\medium{Dac\u{a} aceast\u{a} condi\c{t}ie nu este satisf\u{a}cut\u{a}, num\u{a}rul este compus, iar programul se va oprii.
+A\c{s}adar, va fi nevoie de mai multe itera\c{t}ii pentru a stabili cu un grad mai ridicat de
+certitudine dac\u{a} un num\u{a}r este prim sau compus.}
+\newline
+\newline
+
+Pseudocodul algoritmului:
+\newline
+\newline
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Valoarea simbolului Jacobian pentru un num\u{a}r dat(a), \^{i}n raport cu baza dat\u{a}(n)}
+ res = 1\;
+ 
+ \While{a}{
+  \If{$a \less 0$}{
+  schimb\u{a} semnul lui a\;
+  verific\u{a} valoarea lui $(\frac{-1}{n})$\;
+  \If{$n \% 4 == 3$}{
+     res = -res\;
+  }
+  }
+  \While{a par}{
+  \^{i}mparte a la 2 pana devine impar\;
+  verific\u{a} valoarea lui ($\frac{2}{n}$)\;
+  \If{$n \% 8 == 3$ sau $n \% 8 == 5$}{
+    res = -res\;
+  }
+  }
+  schimb\u{a}(a, n)\;   
+  verific\u{a} valoarea lui $(\frac{a}{n})\cdot(\frac{n}{a})$\;
+  \If{$a \% 4 == 3$  sau $n \% 4 == 3$}{
+  res = -res;
+  }
+  recalculeaz\u{a} restul \c{s}i reia procesul\;
+  $a \%= n$\;
+ }
+ \If{$n == 1$}{
+  return res\;
+ }
+ 
+ return 0\;
+ \caption{Jacobian(a, n)}
+\end{algorithm}
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Adev\u{a}rat dac\u{a} num\u{a}rul este probabil prim, fals dac\u{a} num\u{a}rul este compus}
+ \For{i = 1 : k}{
+  genereaz\u{a} un num\u{a}r aleator a din intervalul [1, n-1]\;
+  
+  Jacobian(a, n)\;
+  
+  calculeaz\u{a} rezultatul lui Euler $a^{\frac{n-1}{2}}\mod{n}$\;
+  
+  \If{Jacobian $ \neq $ euler\_result}{
+    return false\;
+  }
+ }
+ 
+ return true\;
+ \caption{Solovay-Strassen(n, k)}
+\end{algorithm}
+    
+
+\subsubsection{Frobenius\cite{frobenius}}
+
+Fie n un num\u{a}r impar care nu este p\u{a}trat perfect.
+\newline
+\newline
+Definim indexul Frobenius($Ind_F(n)$) ca fiind cel mai mic num\u{a}r c din intervalul [-1,2,3,4,5,6...] astfel \^{i}nc\^{a}t simbolul Jacobi $J(c/n) \neq 1$.
+\newline
+\newline
+Fie z:
+\[
+    z \equal
+    \begin{cases}
+        2 + \sqrt{c},& \text{$c = -1,2$} \\
+        1 + \sqrt{c},& \text{$c \geq 3$.}
+    \end{cases}
+\]
+
+Putem afirma c\u{a} n este Frobenius probabil prim dac\u{a}:
+
+\[
+    z^n \equiv \conjugatet{z} \mod{n}.
+\]
+
+Pseudocod:
+\newline
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Adev\u{a}rat dac\u{a} num\u{a}rul este probabil prim, fals dac\u{a} num\u{a}rul este compus}
+ verific\u{a} dac\u{a} n este p\u{a}trat perfect\;
+ 
+ calculeaza c = indexul Frobenius\;
+ 
+ calculeaz\u{a} $z^n \mod{n}$ prin \^{i}nmul\c{t}iri repetate\;
+ \eIf{$z^n\mod{n} == \conjugatet{z}\mod{n}$}{
+    return true\;
+ }{
+    return false\;
+ }
+ \caption{Frobenius(n)}
+\end{algorithm}
+
+\subsection{Analiza complexit\u{a}\c{t}ii solu\c{t}iilor}
+
+\subsubsection{Solovay-Strassen}\cite{solovayMath2}
+
+Pentru a calcula partea exponen\c{t}ial\u{a} ($a^{\frac{p-1}{2}}\mod{n}$) avem complexitatea
+de $\Omicron{((\log_2 n)^3)}$, iar pentru calculul simbolului Jacobian avem complexitatea de
+$\Omicron{((\log_2 n)^2)}$. Datorit\u{a} faptului ca algoritmul Solovay-Strassen este repetat pentru o mai bun\u{a} acurate\c{t}e, complexitatea sa final\u{a} va fi $\Omicron{(k \cdot (\log_2 n)^3)}$, unde k reprezint\u{a} num\u{a}rul de itera\c{t}ii dat \^{i}n input.
+\subsubsection{Frobenius}\cite{frobenius}
+
+Pentru a calcula indexul Frobenius ne folosim de funcția Jacobian de la algoritmul Solovay-Strassen, deci complexitatea va fi $\Omicron{((\log_2 n)^2)}$, iar pentru calcularea
+lui $z^n\mod{n}$ vom folosii înmulțiri repetate, care în total vor avea complexitatea
+$\Omicron{(\log_2 n)}$. Astfel, în final, algoritmul nostru va avea complexitatea
+$\Omicron{((\log_2 n)^2)}$.
+
+\subsection{Prezentarea principalelor avantaje \c{s}i dezavantaje pentru solu\c{t}iile luate \^{i}n considerare}
+
+Algoritmul Solovay-Strassen are ca prim avantaj faptul că poate calcula cu o acuratețe foarte bună dacă un număr este probabil prim sau compus(mai ales daca rulăm pe un număr cât mai mare de iterații), însă aceasta vine și cu un dezavantaj, timpul de execuție crește odată cu creșterea numărului de iterații. Aceste iterații sunt necesare, deoarce fără ele programul are o probabilitate $\geq \frac{1}{2}$(Afirmația 10 din \cite{solovayFail}) de a afirma că un număr compus este compus. Acest fapt reiese din implementarea verificării primalității unui număr, unde algoritmul folosește o variabilă aleasă aleator din intervalul [1, n-1]. Odată cu introducerea interațiilor, programul ajunge la o probabilitate de succes de $(1 - \frac{1}{2^t})$(Teorema 9 din \cite{solovayFail}), unde t este numărul de iterații.
+
+\newline
+\newline
+Referitor la algoritmul Frobenius, îl putem considera "opusul" algoritmului prezentat
+anterior. Acesta este mai eficient decât Solovay-Strassen, deoarce nu se folosește de
+variabile alese aletor, eliminând astfel nevoia de iterații. Cu toate acestea, algoritmul are
+un dezavantaj nedemonstrat încă. Frobenius poate întoarce prim pentru un număr compus, acest
+număr fiind denumit "Frobenius pseudoprime"(FPP)(pagina 4 din \cite{frobenius}). Spunem
+nedemonstrat, deoarce există o ipoteză care afirmă că nu ar exista numere Frobenius
+pseudoprime(deocamdată fiind doar afirmat că acestea sunt mai mari decât
+$2^{64}$\cite{frobenius}).
+
+\section{Evaluare}
+
+\subsection{Descrierea modalit\u{a}\c{t}ii de construire a setului de teste folosite pentru validare}
+
+Setul de teste a fost construit \^{i}n formatul specificat: pe prima linie se va afla
+num\u{a}rul de elemente din secven\c{t}\u{a}, iar pe urm\u{a}toarea linie numerele care
+urmeaz\u{a} s\u{a} fie testate.
+\newline
+\newline
+Testele 0, 5 au fost construite de m\^{a}n\u{a}, iar restul testelor cu ajutorul generatorului(test\_generator.cpp).
+\newline
+\newline
+Test 0: primele 10 numere naturale
+\newline
+Test 1: primele 100 numere naturale
+\newline
+Test 2: primele 1000 numere naturale
+\newline
+Test 3: primele 10000 numere naturale
+\newline
+Test 4: numere compuse formate prin a \^{i}nmul\c{t}i repetat 4 cu 3
+\newline
+Test 5: numere compuse foarte mari(apropri\^{i}ndu-se de $10^{47} $)
+\newline
+Test 6: primele 40 numere din \c{s}irul lui Fibonacci
+\newline
+Test 7: primele numere prime mai mici dec\^{a}t 1000, generate folosind ciurul lui Erastotene
+
+\subsection{Specifica\c{t}iile sistemului de calcul pe care au fost rulate testele}
+
+Hardware
+\newline
+-CPU: Intel® Core™ i5-8265U CPU @ 1.60GHz × 8 
+\newline
+-RAM: 15,3 GiB RAM DDR4 2666MHz 
+\newline 
+-Storage: 256GiB SSD Kingston KC600
+\newline
+\newline
+Software:
+\newline
+-OS: Ubuntu 20.04.1 LTS 64-bit
+\newline
+-GNOME Version: 3.36.3
+\newline
+-Versiune g++: 9.3.0
+
+
+\subsection{Ilustrarea rezultatelor evalu\u{a}rii solu\c{t}iilor pe setul de teste}
+
+Pentru fiecare test rulat, am calculat timpul de execu\c{t}ie pentru fiecare num\u{a}r din
+fi\c{s}ierul de intrare. Dup\u{a} aceea, am calculat media testului ca fiind suma timpurilor
+de execu\c{t}ie pentru fiecare num\u{a}r \^{i}mp\u{a}r\c{t}it\u{a} la num\u{a}rul de elemente
+din secven\c{t}\u{a}.
+\newline
+Pentru algoritmul Solovay-Strassen s-au folosit 100 de itera\c{t}ii.
+\newline
+Am rulat fiecare test de 10 ori pentru o accurate\c{t}e c\^{a}t mai bun\u{a}. Astfel, \^{i}n
+tabel se vor afla mediile fiecarui test, unitatea de masur\u{a} folosit\u{a} fiind
+nanosecunde.
+\newline
+
+\begin{tabularx}{0.8\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\raggedleft\arraybackslash}X | }
+ \hline
+ Num\u{a}r Test & Solovay-Strassen & Frobenius \\
+ \hline
+ 0  & 2955.4  & \textbf{62.2}  \\
+ \hline
+ 1 & 3832.6 & \textbf{86.3} \\
+ \hline
+ 2 & 3665.8 & \textbf{117.4} \\
+ \hline
+ 3 & 3809.4 & \textbf{140.5} \\
+ \hline 
+ 4 & 23.9 & \textbf{22.9} \\
+ \hline
+ 5 & \textbf{1433.9} & 1938 \\
+ \hline
+ 6 & 6040.8 & \textbf{204.4} \\ 
+ \hline
+ 7 & 21779.4 & \textbf{283.4} \\
+\hline
+\end{tabularx}
+
+\subsection{Prezentarea valorilor ob\c{t}inute pe teste}
+Rezultatele sunt pe m\u{a}sura a\c{s}tept\u{a}rilor, deoarce algoritmul Solovay-Strassen are
+de realizat un număr de iterații dat, acesta va avea un timp de execuție mai mare în
+majoritatea cazurilor.
+\newline
+Singura excepție fiind testul 5 în care sunt testate numai numere compuse, de valori cât mai
+mari, Solovay-Strassen dovedindu-se mai rapid decât Frobenius.
+\newline
+Ambii algoritmi afisează output-ul corect în toate fișierele de ieșire.
+\section{Concluzii}
+După toate informațiile acumulate despre acești doi algoritmi am ajuns la concluzia că ambii
+sunt destul de folositori.
+\newline
+Aș opta să folosesc algoritmul Solovay-Strassen pentru cazurile cand va fi nevoie să testez
+numere cât mai mari, unde timpul nu ar fi o problemă.
+\newline
+Când vine vorba de cel de-al doilea algoritm, Frobenius, as opta să il folosesc în cazurile
+în care este nevoie să testez primalitatea unui numar relativ mic, într-un timp cât mai
+scurt.
+\newpage
+\printbibliography
+\end{document}
